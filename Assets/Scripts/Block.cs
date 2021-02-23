@@ -12,14 +12,24 @@ public class Block : MonoBehaviour
 
     //Cached reference
     Level level;
+    SpriteRenderer blockRenderer;
+    private ParticleSystem blockParticleSystem;
+
 
     //State variables
-    [SerializeField] int timesHit; //Only serialized for debug purposes
+    [SerializeField] int timesHit; //Serialized for debug purposes
 
 
-    private void Start()
+    void Start()
     {
         CountBreakableBlocks();
+        blockParticleSystem = GetComponent<ParticleSystem>();
+    }
+
+    private void Update()
+    {
+        var main = blockParticleSystem.main;
+        main.startColor = new Color(1, 0, 1, 1); 
     }
 
     private void CountBreakableBlocks()
@@ -57,7 +67,7 @@ public class Block : MonoBehaviour
     {
         int spriteIndex = timesHit - 1;
         if (hitSprites[spriteIndex] != null)
-        { 
+        {
             GetComponent<SpriteRenderer>().sprite = hitSprites[spriteIndex];
         }
         else

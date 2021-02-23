@@ -28,9 +28,12 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
-   /* public void ContinueGame()            This is the continue/restart level method 
-    {
-        
+    public void ContinueGame()
+     {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex);
+        FindObjectOfType<GameSession>().ResetGame();
+
     } 
-   */
+    
 }
